@@ -32,6 +32,7 @@ namespace API
                 options.UseSqlServer(Configuration.GetConnectionString("ConStr"));
             });
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -53,6 +54,7 @@ namespace API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseEndpoints(endpoints =>
             {

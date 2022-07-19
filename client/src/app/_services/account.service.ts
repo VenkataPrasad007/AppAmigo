@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { UrlSerializer } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ if(user){
     if(user){
       localStorage.setItem('user', JSON.stringify(user));
       this.currentUserSource.next(user);
-      
+
     }
   }));
   
@@ -44,6 +44,6 @@ if(user){
   }
   logout(){
     localStorage.removeItem('user');
-    //this.currentUser$ = null;
+    this.currentUserSource.next(null);
   }
 }
